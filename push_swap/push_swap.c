@@ -6,7 +6,7 @@
 /*   By: rarriola <rarriola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:29:55 by rarriola          #+#    #+#             */
-/*   Updated: 2026/01/20 18:40:56 by rarriola         ###   ########.fr       */
+/*   Updated: 2026/01/21 12:22:43 by rarriola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	is_sorted(t_stack *stack_a)
 
 void	sort_three(t_stack *stack_a)
 {
-	t_node *current;
 	int		first;
 	int		second;
 	int		third;
@@ -81,20 +80,38 @@ void	sort_three(t_stack *stack_a)
 		ra(stack_a);
 	else if (second > first && second > third)
 		rra(stack_a);
-	else if (second > first)
+	if (stack_a->top->value > stack_a->top->next->value)
 		sa(stack_a);
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack	*stack_a;
+	t_stack	*stack_b;
 
 	if (argc < 2)
 		return (0);
 	stack_a = init_stack();
-	if (!stack_a)
+	stack_b = init_stack();
+	if (!stack_a || !stack_b)
 		return (0);
 	parse_stack(stack_a, argc, argv);
+	if (is_sorted(stack_a))
+	{
+		free_stack(stack_a);
+		free_stack(stack_b);
+		return (0);
+	}
+	if (stack_a->size == 2)
+	{
+		if (stack_a->top->value > stack_a->top->next->value)
+			sa(stack_a);
+	}
+	else if (stack_a->size == 3)
+		sort_three(stack_a);
+	else if (stack_a->size <= 5)
+		sort_five(stack_a, stack_b);
 	free_stack(stack_a);
+	free_stack(stack_b);
 	return (0);
 }
