@@ -63,14 +63,15 @@ void	rra(t_stack *stack_a);
 void	rrb(t_stack *stack_b);
 void	rrr(t_stack *stack_a, t_stack *stack_b);
 
-/* Algorithm (Main logic) */
+/* Algorithm */
 void	parse_stack(t_stack *stack_a, int argc, char **argv);
+int		is_sorted(t_stack *stack_a);
 void	sort_three(t_stack *stack_a);
 void	sort_five(t_stack *stack_a, t_stack *stack_b);
 void	normalize(t_stack *stack);
 void	sort_big(t_stack *stack_a, t_stack *stack_b);
 void	push_back_to_a(t_stack *stack_a, t_stack *stack_b);
-int	find_max_index(t_stack *stack);
-int	is_sorted(t_stack *stack_a);
+int		find_max_index(t_stack *stack);
+int		find_min_index(t_stack *stack);
 
 #endif

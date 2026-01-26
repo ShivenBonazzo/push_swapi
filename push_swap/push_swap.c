@@ -51,18 +51,18 @@ void	parse_stack(t_stack *stack_a, int argc, char **argv)
 	}
 	free_matrix(args);
 }
-int	is_sorted(t_stack *stack_a)
-{
-	t_node *current;
 
-	current = stack_a->top;
-	while (current->next)
+static void	sort_small(t_stack *stack_a, t_stack *stack_b)
+{
+	if (stack_a->size == 2)
 	{
-		if (current->value > current->next->value)
-			return (0);
-		current = current->next;
+		if (stack_a->top->value > stack_a->top->next->value)
+			sa(stack_a);
 	}
-	return (1);
+	else if (stack_a->size == 3)
+		sort_three(stack_a);
+	else if (stack_a->size <= 5)
+		sort_five(stack_a, stack_b);
 }
 
 int	main(int argc, char **argv)
@@ -84,15 +84,8 @@ int	main(int argc, char **argv)
 		free_stack(stack_b);
 		return (0);
 	}
-	if (stack_a->size == 2)
-	{
-		if (stack_a->top->value > stack_a->top->next->value)
-			sa(stack_a);
-	}
-	else if (stack_a->size == 3)
-		sort_three(stack_a);
-	else if (stack_a->size <= 5)
-		sort_five(stack_a, stack_b);
+	if (stack_a->size <= 5)
+		sort_small(stack_a, stack_b);
 	else
 		sort_big(stack_a, stack_b);
 	free_stack(stack_a);
