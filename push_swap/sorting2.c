@@ -77,14 +77,10 @@ void	push_back_to_a(t_stack *stack_a, t_stack *stack_b)
 	}
 }
 
-void	sort_big(t_stack *stack_a, t_stack *stack_b)
+static void	push_to_b(t_stack *stack_a, t_stack *stack_b, int chunk)
 {
-	int	chunk_size;
 	int	i;
 
-	chunk_size = stack_a->size / 5;
-	if (stack_a->size > 100)
-		chunk_size = stack_a->size / 11;
 	i = 0;
 	while (stack_a->size > 0)
 	{
@@ -94,7 +90,7 @@ void	sort_big(t_stack *stack_a, t_stack *stack_b)
 			rb(stack_b);
 			i++;
 		}
-		else if (stack_a->top->index <= i + chunk_size)
+		else if (stack_a->top->index <= i + chunk)
 		{
 			pb(stack_b, stack_a);
 			i++;
@@ -102,5 +98,15 @@ void	sort_big(t_stack *stack_a, t_stack *stack_b)
 		else
 			ra(stack_a);
 	}
+}
+
+void	sort_big(t_stack *stack_a, t_stack *stack_b)
+{
+	int	chunk;
+
+	chunk = stack_a->size / 5;
+	if (stack_a->size > 100)
+		chunk = stack_a->size / 13;
+	push_to_b(stack_a, stack_b, chunk);
 	push_back_to_a(stack_a, stack_b);
 }
