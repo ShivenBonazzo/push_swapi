@@ -9,10 +9,11 @@ SRCS = push_swap.c \
        utilities2.c \
        utilities3.c \
        ft_split.c \
-       operations.c \
-       operations2.c \
-       operations3.c \
-       operations4.c
+       push.c \
+       rotate.c \
+       swap.c \
+       sorting.c \
+       reverse_rotate.c
 
 # Crea la lista degli oggetti (.o)
 OBJS = $(SRCS:.c=.o)
