@@ -48,16 +48,12 @@ static char	*word_dup(const char *str, int start, int finish)
 	return (word);
 }
 
-char	**ft_split(char const *s, char c)
+static void	fill_split(char **split, char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
 	int		index;
-	char	**split;
 
-	split = malloc((count_words(s, c) + 1) * sizeof(char *));
-	if (!s || !split)
-		return (NULL);
 	i = 0;
 	j = 0;
 	index = -1;
@@ -73,5 +69,17 @@ char	**ft_split(char const *s, char c)
 		i++;
 	}
 	split[j] = NULL;
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**split;
+
+	if (!s)
+		return (NULL);
+	split = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!split)
+		return (NULL);
+	fill_split(split, s, c);
 	return (split);
 }

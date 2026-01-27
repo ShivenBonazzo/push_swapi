@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations4.c                                      :+:      :+:    :+:   */
+/*   reverse_rotate.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarriola <rarriola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	reverse_rotate(t_stack *stack)
+static void	reverse_rotate(t_stack *stack)
 {
 	t_node	*penultimate;
 	t_node	*last;
@@ -20,11 +20,8 @@ void	reverse_rotate(t_stack *stack)
 	if (stack == NULL || stack->size < 2)
 		return ;
 	penultimate = stack->top;
-	last = stack->top;
 	while (penultimate->next->next)
-	{
 		penultimate = penultimate->next;
-	}
 	last = penultimate->next;
 	last->next = stack->top;
 	stack->top = last;
@@ -49,8 +46,9 @@ void	rrb(t_stack *stack_b)
 
 void	rrr(t_stack *stack_a, t_stack *stack_b)
 {
-	if ((stack_a == NULL || stack_a->size < 2)
-		|| (stack_b == NULL || stack_b->size < 2))
+	if (stack_a == NULL || stack_a->size < 2)
+		return ;
+	if (stack_b == NULL || stack_b->size < 2)
 		return ;
 	reverse_rotate(stack_a);
 	reverse_rotate(stack_b);

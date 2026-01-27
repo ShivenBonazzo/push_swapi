@@ -26,14 +26,14 @@ char	*ft_strdup(const char *src)
 {
 	char	*dest;
 	int		i;
-	int		lenght;
+	int		len;
 
-	lenght = ft_strlen(src);
-	dest = (char *) malloc(sizeof(char) * (lenght + 1));
+	len = ft_strlen(src);
+	dest = (char *)malloc(sizeof(char) * (len + 1));
 	if (dest == NULL)
 		return (NULL);
 	i = 0;
-	while (i < lenght)
+	while (i < len)
 	{
 		dest[i] = src[i];
 		i++;

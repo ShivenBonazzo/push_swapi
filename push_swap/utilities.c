@@ -20,6 +20,7 @@ t_node	*new_node(int value)
 	if (!new)
 		return (NULL);
 	new->value = value;
+	new->index = 0;
 	new->next = NULL;
 	return (new);
 }
@@ -46,7 +47,7 @@ t_node	*remove_node(t_node *head)
 	return (tmp);
 }
 
-char	*input(int argc, char **argv )
+char	*input(int argc, char **argv)
 {
 	char	*result;
 	int		i;

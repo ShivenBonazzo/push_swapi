@@ -6,7 +6,7 @@
 /*   By: rarriola <rarriola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 15:29:55 by rarriola          #+#    #+#             */
-/*   Updated: 2026/01/26 10:55:06 by rarriola         ###   ########.fr       */
+/*   Updated: 2026/01/26 18:45:12 by rarriola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,10 @@ t_stack	*init_stack(void)
 	return (stack);
 }
 
-void	parse_stack(t_stack *stack_a, int argc, char **argv)
+static void	process_args(t_stack *stack_a, char **args, int i)
 {
-	char	*input_str;
-	char	**args;
 	long	n;
-	int		i;
 
-	input_str = input(argc, argv);
-	args = ft_split(input_str, ' ');
-	free(input_str);
-	i = 0;
-	while (args[i])
-		i++;
 	while (--i >= 0)
 	{
 		if (!is_valid(args[i]))
@@ -49,6 +40,26 @@ void	parse_stack(t_stack *stack_a, int argc, char **argv)
 		stack_a->top = add_node(stack_a->top, (int)n);
 		stack_a->size++;
 	}
+}
+
+void	parse_stack(t_stack *stack_a, int argc, char **argv)
+{
+	char	*input_str;
+	char	**args;
+	int		i;
+
+	input_str = input(argc, argv);
+	args = ft_split(input_str, ' ');
+	free(input_str);
+	if (!args || !args[0])
+	{
+		free_matrix(args);
+		error_exit(stack_a, NULL);
+	}
+	i = 0;
+	while (args[i])
+		i++;
+	process_args(stack_a, args, i);
 	free_matrix(args);
 }
 

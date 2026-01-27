@@ -58,19 +58,19 @@ int	find_max_index(t_stack *stack)
 
 void	push_back_to_a(t_stack *stack_a, t_stack *stack_b)
 {
-	int	max_index;
+	int	max_idx;
 
 	while (stack_b->size > 0)
 	{
-		max_index = find_max_index(stack_b);
-		if (max_index <= stack_b->size / 2)
+		max_idx = find_max_index(stack_b);
+		if (max_idx <= stack_b->size / 2)
 		{
-			while (max_index-- > 0)
+			while (max_idx-- > 0)
 				rb(stack_b);
 		}
 		else
 		{
-			while (max_index++ < stack_b->size)
+			while (max_idx++ < stack_b->size)
 				rrb(stack_b);
 		}
 		pa(stack_a, stack_b);

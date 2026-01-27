@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations3.c                                      :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rarriola <rarriola@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	rotate(t_stack *stack)
+static void	rotate(t_stack *stack)
 {
 	t_node	*tmp;
 	t_node	*last;
@@ -46,8 +46,9 @@ void	rb(t_stack *stack_b)
 
 void	rr(t_stack *stack_a, t_stack *stack_b)
 {
-	if ((stack_a == NULL || stack_a->size < 2)
-		|| (stack_b == NULL || stack_b->size < 2))
+	if (stack_a == NULL || stack_a->size < 2)
+		return ;
+	if (stack_b == NULL || stack_b->size < 2)
 		return ;
 	rotate(stack_a);
 	rotate(stack_b);
